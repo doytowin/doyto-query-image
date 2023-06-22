@@ -1,10 +1,9 @@
 FROM mysql:8-oracle
 
-# copy file into container
-COPY setup.sh /mysql/setup.sh
-COPY privileges.sql /mysql/privileges.sql
-COPY schema.sql /mysql/schema.sql
-COPY data.sql /mysql/data.sql
+COPY privileges.sql /docker-entrypoint-initdb.d/1.sql
+COPY schema.sql /docker-entrypoint-initdb.d/2.sql
+COPY data.sql /docker-entrypoint-initdb.d/3.sql
 
-# exec these command when container start up
-CMD ["sh", "/mysql/setup.sh"]
+ADD my.cnf /etc/mysql/conf.d
+
+EXPOSE 3306
