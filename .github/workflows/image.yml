@@ -1,0 +1,16 @@
+name: Build Docker Images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+    # Publish semver tags as releases.
+    tags: [ 'v*.*.*' ]
+
+jobs:
+  mysql8:
+    name: Build Image mysql8
+    uses: ./github/workflows/docker-publish.yml
+    secrets: inherit
+    with:
+      image-name: 'mysql8'

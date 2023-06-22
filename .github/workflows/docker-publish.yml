@@ -6,10 +6,11 @@ name: Docker
 # documentation.
 
 on:
-  push:
-    branches: [ "main" ]
-    # Publish semver tags as releases.
-    tags: [ 'v*.*.*' ]
+  workflow_call:
+    inputs:
+      image-name:
+        required: true
+        type: string
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -62,7 +63,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-mysql8
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ inputs.image-name}}
           tags: |
             type=ref,event=branch
             type=ref,event=tag
@@ -73,8 +74,7 @@ jobs:
         id: build-and-push
         uses: docker/build-push-action@v4
         with:
-          context: ./mysql8
-          file: ./mysql8/Dockerfile
+          context: ./${{ inputs.image-name}}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
