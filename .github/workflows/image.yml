@@ -10,7 +10,6 @@ on:
 jobs:
   mysql8:
     name: Build Image mysql8
-    uses: ./github/workflows/docker-publish.yml
-    secrets: inherit
+    uses: ./.github/workflows/docker-publish.yml
     with:
       image-name: 'mysql8'
