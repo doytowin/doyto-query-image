@@ -168,4 +168,4 @@ jobs:
         uses: camargo/delete-untagged-action@v1
         with:
           github-token: ${{ github.token }}
-          package-name: ${{ env.IMAGE_NAME }}-${{ matrix.image-name }}
+          package-name: doyto-query-image-${{ matrix.image-name }}
