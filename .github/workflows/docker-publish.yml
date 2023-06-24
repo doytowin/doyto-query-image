@@ -109,14 +109,14 @@ jobs:
       # https://docs.docker.com/build/ci/github-actions/multi-platform/
       - name: Export digest
         run: |
-          mkdir -p /tmp/digests
+          mkdir -p /tmp/digests/${{ matrix.image-name }}
           digest="${{ steps.build-and-push.outputs.digest }}"
-          touch "/tmp/digests/${digest#sha256:}"
+          touch "/tmp/digests/${{ matrix.image-name }}/${digest#sha256:}"
       - name: Upload digest
         uses: actions/upload-artifact@v3
         with:
           name: digests
-          path: /tmp/digests/*
+          path: /tmp/digests/${{ matrix.image-name }}/*
           if-no-files-found: error
           retention-days: 1
 
@@ -136,7 +136,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: digests
-          path: /tmp/digests
+          path: /tmp/digests/${{ matrix.image-name }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Docker meta
@@ -154,7 +154,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ github.token }}
       - name: Create manifest list and push
-        working-directory: /tmp/digests
+        working-directory: /tmp/digests/${{ matrix.image-name }}
         run: |
           docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
             $(printf '${{ env.IMAGE }}@sha256:%s ' *)
