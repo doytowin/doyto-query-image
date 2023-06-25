@@ -164,8 +164,8 @@ jobs:
       - name: Inspect image
         run: |
           docker buildx imagetools inspect ${{ env.IMAGE }}:${{ steps.meta.outputs.version }}
-      - name: Cleanup
-        uses: camargo/delete-untagged-action@v1
-        with:
-          github-token: ${{ github.token }}
-          package-name: doyto-query-image-${{ matrix.image-name }}
+#      - name: Cleanup
+#        uses: camargo/delete-untagged-action@v1
+#        with:
+#          github-token: ${{ github.token }}
+#          package-name: doyto-query-image-${{ matrix.image-name }}
