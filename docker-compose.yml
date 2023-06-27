@@ -1,0 +1,32 @@
+version: '3'
+services:
+  mysql:
+    restart: always
+    image: ghcr.io/doytowin/doyto-query-image-mysql8:main
+    build: mysql8
+    container_name: mysql8
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "MYSQL_ROOT_PASSWORD=root"
+    ports:
+      - 3306:3306
+
+  postgres:
+    restart: always
+    image: ghcr.io/doytowin/doyto-query-image-postgres:main
+    build: postgres
+    container_name: postgres
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "POSTGRES_USER=root"
+      - "POSTGRES_PASSWORD=Pa55word"
+    ports:
+      - 5432:5432
+
+  mssql:
+    restart: always
+    image: ghcr.io/doytowin/doyto-query-image-mssql:main
+    build: mssql
+    container_name: mssql
+    ports:
+      - 1433:1433
