@@ -85,7 +85,8 @@ create table doytowin.a_user_and_role
     create_user_id bigint
 );
 alter table doytowin.a_user_and_role
-    add constraint a_user_and_role_unique_constraint unique (user_id, role_id);
+    add constraint a_user_and_role_unique_constraint unique (user_id, role_id)
+        with (ignore_dup_key = ON);
 
 create table doytowin.t_perm
 (
@@ -100,7 +101,8 @@ create table doytowin.a_role_and_perm
     perm_id int
 );
 alter table doytowin.a_role_and_perm
-    add constraint a_role_and_perm_unique_constraint unique (role_id, perm_id);
+    add constraint a_role_and_perm_unique_constraint unique (role_id, perm_id)
+        with (ignore_dup_key = ON);
 
 create table doytowin.a_perm_and_menu
 (
@@ -108,5 +110,6 @@ create table doytowin.a_perm_and_menu
     menu_id int
 );
 alter table doytowin.a_perm_and_menu
-    add constraint a_perm_and_menu_unique_constraint unique (perm_id, menu_id);
+    add constraint a_perm_and_menu_unique_constraint unique (perm_id, menu_id)
+        with (ignore_dup_key = ON);
 
