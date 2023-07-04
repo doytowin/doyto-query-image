@@ -36,6 +36,7 @@ jobs:
         - mssql
         - postgres
         - oracle
+        - sqlite
         platform:
         - linux/amd64
         - linux/arm64/v8
@@ -134,6 +135,7 @@ jobs:
           - mssql
           - postgres
           - oracle
+          - sqlite
     steps:
       - name: Set Image Name
         run: echo "IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.image-name }}" >> $GITHUB_ENV
