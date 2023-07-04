@@ -30,6 +30,7 @@ jobs:
       id-token: write
 
     strategy:
+      fail-fast: false
       matrix:
         image-name:
         - mysql8
@@ -129,6 +130,7 @@ jobs:
       contents: read
       packages: write
     strategy:
+      fail-fast: false
       matrix:
         image-name:
           - mysql8
