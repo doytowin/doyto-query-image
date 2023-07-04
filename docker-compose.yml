@@ -5,9 +5,6 @@ services:
     image: ghcr.io/doytowin/doyto-query-image-mysql8:main
     build: mysql8
     container_name: mysql8
-    environment:
-      - "TZ=Asia/Shanghai"
-      - "MYSQL_ROOT_PASSWORD=root"
     ports:
       - 3306:3306
 
@@ -16,10 +13,6 @@ services:
     image: ghcr.io/doytowin/doyto-query-image-postgres:main
     build: postgres
     container_name: postgres
-    environment:
-      - "TZ=Asia/Shanghai"
-      - "POSTGRES_USER=root"
-      - "POSTGRES_PASSWORD=Pa55word"
     ports:
       - 5432:5432
 
@@ -36,9 +29,5 @@ services:
     build: oracle
     image: ghcr.io/doytowin/doyto-query-image-oracle:main
     container_name: oracle
-    environment:
-      - TZ=Asia/Shanghai
-      - ORACLE_SID=XE
-      - ORACLE_PASSWORD=oracle
     ports:
       - 1521:1521
