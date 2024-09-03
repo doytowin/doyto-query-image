@@ -144,7 +144,7 @@ jobs:
       - name: Set Image Name
         run: echo "IMAGE=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ matrix.image-name }}" >> $GITHUB_ENV
       - name: Download digests
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.7
         with:
           name: digests-${{ matrix.image-name }}
           path: /tmp/digests
